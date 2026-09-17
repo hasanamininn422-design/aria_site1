@@ -1,0 +1,11 @@
+services:
+  postgres:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_USER: aria
+      POSTGRES_PASSWORD: aria
+      POSTGRES_DB: aria_color
+    ports: ["5432:5432"]
+    volumes: ["aria_postgres:/var/lib/postgresql/data"]
+volumes:
+  aria_postgres:
