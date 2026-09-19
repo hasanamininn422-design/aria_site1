@@ -1,0 +1,186 @@
+generator client {
+  provider = "prisma-client-js"
+}
+datasource db {
+  provider = "postgresql"
+  url = env("DATABASE_URL")
+}
+enum Role {
+  USER
+  EDITOR
+  ADMIN
+  SUPER_ADMIN
+}
+enum RequestStatus {
+  NEW
+  UNDER_REVIEW
+  CONTACTED
+  VISIT_SCHEDULED
+  COMPLETED
+  CANCELLED
+}
+enum RequestKind {
+  CONSULTATION
+  QUOTE
+  VISIT
+  CONTACT
+}
+model User {
+  id String @id @default(cuid())
+  email String @unique
+  passwordHash String
+  role Role @default(USER)
+  profile Profile?
+  sessions Session[]
+  requests ServiceRequest[]
+  notifications Notification[]
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+model Profile {
+  id String @id @default(cuid())
+  userId String @unique
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  name String
+  phone String?
+}
+model Session {
+  id String @id @default(cuid())
+  tokenHash String @unique
+  userId String
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  expiresAt DateTime
+  @@index([expiresAt])
+}
+model ServiceRequest {
+  id String @id @default(cuid())
+  kind RequestKind
+  name String
+  phone String
+  projectType String
+  propertyType String?
+  area Float?
+  service String?
+  wallCondition String?
+  paintType String?
+  address String?
+  preferredDate DateTime?
+  preferredTime String?
+  description String
+  status RequestStatus @default(NEW)
+  userId String?
+  user User? @relation(fields: [userId], references: [id], onDelete: SetNull)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  @@index([status, createdAt])
+  @@index([userId, createdAt])
+}
+model RateLimit {
+  key String @id
+  count Int @default(1)
+  expiresAt DateTime
+  @@index([expiresAt])
+}
+model Service {
+  id String @id @default(cuid())
+  slug String @unique
+  title String
+  summary String
+  body String
+  cover String?
+  alt String?
+  seoTitle String?
+  metaDescription String?
+  ogImage String?
+  published Boolean @default(false)
+  updatedAt DateTime @updatedAt
+}
+model PortfolioProject {
+  id String @id @default(cuid())
+  slug String @unique
+  title String
+  category String
+  description String
+  cover String?
+  illustrative Boolean @default(true)
+  published Boolean @default(false)
+  images PortfolioImage[]
+  beforeAfter BeforeAfter[]
+}
+model PortfolioImage {
+  id String @id @default(cuid())
+  projectId String
+  project PortfolioProject @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  url String
+  alt String
+  position Int @default(0)
+}
+model BeforeAfter {
+  id String @id @default(cuid())
+  beforeUrl String
+  afterUrl String
+  caption String
+  projectId String?
+  project PortfolioProject? @relation(fields: [projectId], references: [id], onDelete: SetNull)
+  published Boolean @default(false)
+}
+model Media {
+  id String @id @default(cuid())
+  storageKey String @unique
+  name String
+  mime String
+  bytes Int
+  alt String?
+  createdAt DateTime @default(now())
+}
+model BlogCategory {
+  id String @id @default(cuid())
+  name String
+  slug String @unique
+  posts BlogPost[]
+}
+model BlogPost {
+  id String @id @default(cuid())
+  slug String @unique
+  title String
+  excerpt String
+  body String
+  cover String?
+  alt String?
+  seoTitle String?
+  metaDescription String?
+  ogImage String?
+  published Boolean @default(false)
+  publishAt DateTime?
+  categoryId String?
+  category BlogCategory? @relation(fields: [categoryId], references: [id], onDelete: SetNull)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+model Faq {
+  id String @id @default(cuid())
+  question String
+  answer String
+  position Int @default(0)
+  published Boolean @default(false)
+}
+model Review {
+  id String @id @default(cuid())
+  name String
+  text String
+  approved Boolean @default(false)
+  createdAt DateTime @default(now())
+}
+model Notification {
+  id String @id @default(cuid())
+  userId String
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  title String
+  body String
+  readAt DateTime?
+  createdAt DateTime @default(now())
+}
+model Setting {
+  key String @id
+  value String
+}

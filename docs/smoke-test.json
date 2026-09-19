@@ -1,0 +1,32 @@
+{
+  "testedAt": "2026-09-17T16:48:32.205Z",
+  "routes": 23,
+  "paths": [
+    "/",
+    "/services",
+    "/portfolio",
+    "/color-selection",
+    "/before-after",
+    "/about",
+    "/consultation",
+    "/services/building-painting",
+    "/services/decorative-painting",
+    "/services/facade-painting",
+    "/services/office-painting",
+    "/portfolio/آپارتمان-آرام",
+    "/portfolio/اتاق-خواب-نرم",
+    "/portfolio/دفتر-با-تمرکز",
+    "/visit-request",
+    "/request-quote",
+    "/contact",
+    "/status",
+    "/services/ceiling-painting",
+    "/services/paint-restoration",
+    "/services/commercial-painting",
+    "/services/color-consultation",
+    "/portfolio/فضای-تجاری-معاصر"
+  ],
+  "failures": [],
+  "unconfiguredApi": 503,
+  "missingPage": 404
+}

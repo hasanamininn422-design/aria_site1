@@ -1,0 +1,3 @@
+'use client';
+import { useEffect, useRef, useState, type ReactNode } from 'react';
+export default function Reveal({children,className='' }:{children:ReactNode,className?:string}){const ref=useRef<HTMLDivElement>(null);const [shown,setShown]=useState(false);useEffect(()=>{if(matchMedia('(prefers-reduced-motion: reduce)').matches){setShown(true);return}const observer=new IntersectionObserver(([e])=>{if(e.isIntersecting){setShown(true);observer.disconnect()}},{threshold:.12});if(ref.current)observer.observe(ref.current);return()=>observer.disconnect()},[]);return <div ref={ref} className={`reveal ${shown?'revealed':''} ${className}`}>{children}</div>}

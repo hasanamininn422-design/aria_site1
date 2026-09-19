@@ -1,0 +1,1 @@
+import Link from 'next/link';export default function NotFound(){return <main><section className="page-hero"><div className="eyebrow">404</div><h1>این صفحه<br/><em>پیدا نشد.</em></h1><p>ممکن است مسیر تغییر کرده باشد.</p><Link className="btn" href="/">بازگشت به خانه ↗</Link></section></main>}

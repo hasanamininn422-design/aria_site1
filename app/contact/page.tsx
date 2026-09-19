@@ -1,0 +1,3 @@
+import Link from 'next/link';
+export const metadata={title:'تماس با آریا کالر'};
+export default function Contact(){return <main><section className="page-hero"><div className="eyebrow">CONTACT</div><h1>در حال آماده‌سازی<br/><em>راه ارتباطی.</em></h1><p>برای حفظ دقت، تا زمان ثبت و تأیید تنظیمات واقعی، هیچ شماره یا ایمیل فرضی در سایت نمایش نمی‌دهیم.</p></section><section className="section"><div className="contact-box"><h2>پرسش شما ارزش پاسخ درست را دارد.</h2><p>صفحهٔ مشاوره توضیح می‌دهد چه اطلاعاتی برای شروع مفید است و چرا فرم فعلاً ارسال نمی‌شود.</p><Link href="/consultation" className="btn">رفتن به مشاورهٔ رنگ ↗</Link></div></section></main>}

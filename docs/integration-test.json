@@ -1,0 +1,142 @@
+{
+  "testedAt": "2026-09-17T17:12:52.099Z",
+  "checks": [
+    {
+      "name": "Anonymous dashboard redirects to login",
+      "passed": true
+    },
+    {
+      "name": "Registration persisted",
+      "passed": true
+    },
+    {
+      "name": "Session cookie HttpOnly and Secure",
+      "passed": true
+    },
+    {
+      "name": "Client cannot assign privileged role",
+      "passed": true
+    },
+    {
+      "name": "Password is hashed with scrypt",
+      "passed": true
+    },
+    {
+      "name": "Database stores hashed session token only",
+      "passed": true
+    },
+    {
+      "name": "Authenticated dashboard renders",
+      "passed": true
+    },
+    {
+      "name": "Authenticated consultation stored",
+      "passed": true
+    },
+    {
+      "name": "Request bound to authenticated user on server",
+      "passed": true
+    },
+    {
+      "name": "Customer receives stored receipt notification",
+      "passed": true
+    },
+    {
+      "name": "Second user created",
+      "passed": true
+    },
+    {
+      "name": "Another customer cannot read private request data",
+      "passed": true
+    },
+    {
+      "name": "User cannot call admin mutation",
+      "passed": true
+    },
+    {
+      "name": "Editor cannot manage private customer requests",
+      "passed": true
+    },
+    {
+      "name": "Profile editing works",
+      "passed": true
+    },
+    {
+      "name": "Profile change persisted",
+      "passed": true
+    },
+    {
+      "name": "Admin test account created as regular user",
+      "passed": true
+    },
+    {
+      "name": "Admin dashboard renders real counts",
+      "passed": true
+    },
+    {
+      "name": "Admin status mutation succeeds",
+      "passed": true
+    },
+    {
+      "name": "Stale concurrent update is rejected",
+      "passed": true
+    },
+    {
+      "name": "Status persists correctly",
+      "passed": true
+    },
+    {
+      "name": "Other user cannot mark private notification read",
+      "passed": true
+    },
+    {
+      "name": "Owner can mark notification read",
+      "passed": true
+    },
+    {
+      "name": "Cross-origin mutation rejected",
+      "passed": true
+    },
+    {
+      "name": "Visit requires date and address",
+      "passed": true
+    },
+    {
+      "name": "Invalid phone rejected on server",
+      "passed": true
+    },
+    {
+      "name": "Oversized streamed body rejected",
+      "passed": true
+    },
+    {
+      "name": "Logout succeeds",
+      "passed": true
+    },
+    {
+      "name": "Logout invalidates database session",
+      "passed": true
+    },
+    {
+      "name": "Logged-out cookie no longer authenticates",
+      "passed": true
+    },
+    {
+      "name": "Wrong password rejected",
+      "passed": true
+    },
+    {
+      "name": "Correct password login succeeds",
+      "passed": true
+    },
+    {
+      "name": "Expired session rejected",
+      "passed": true
+    },
+    {
+      "name": "Repeated authentication attempts rate limited",
+      "passed": true
+    }
+  ],
+  "passed": 34
+}

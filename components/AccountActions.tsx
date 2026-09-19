@@ -1,0 +1,3 @@
+'use client';
+import {useRouter} from 'next/navigation';import {useState} from 'react';
+export default function AccountActions(){const router=useRouter(),[pending,setPending]=useState(false),[error,setError]=useState('');return <div><button className="small-button" disabled={pending} onClick={async()=>{setPending(true);setError('');try{const r=await fetch('/api/auth/logout',{method:'POST',headers:{'Content-Type':'application/json'},body:'{}'});if(!r.ok)throw Error();router.push('/login');router.refresh()}catch{setError('خروج ممکن نشد. دوباره تلاش کنید.')}finally{setPending(false)}}}>{pending?'در حال خروج…':'خروج از حساب'}</button><p role="alert">{error}</p></div>}
