@@ -1,0 +1,1 @@
+export default function Loading(){return <div className="workspace-loading" role="status"><div className="skeleton"/><div className="skeleton"/><p>در حال دریافت اطلاعات…</p></div>}

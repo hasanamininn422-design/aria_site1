@@ -1,5 +1,6 @@
 import {NextRequest,NextResponse} from 'next/server';
 import {createHmac} from 'node:crypto';
+import {currentUser} from '@/lib/auth';
 import {db} from '@/lib/db';
 import {RequestKind} from '@prisma/client';
 export const runtime='nodejs';
@@ -25,9 +26,11 @@ export async function POST(req:NextRequest){
   const projectType=text('projectType',100);if(!projectType)return reply('نوع پروژه را مشخص کنید.',422);
   // Phone-scoped and site-wide limits are durable and atomic, without trusting proxy IP headers.
   const window=Math.floor(Date.now()/3600000);const hash=createHmac('sha256',process.env.RATE_LIMIT_SECRET).update(phone).digest('hex');
+  const user=await currentUser();
   const result=await db.$transaction(async tx=>{
    for(const [key,limit] of [[`phone:${hash}:${window}`,3],[`global:${window}`,100]] as const){const r=await tx.rateLimit.upsert({where:{key},create:{key,count:1,expiresAt:new Date((window+2)*3600000)},update:{count:{increment:1}}});if(r.count>limit)throw new Error('RATE_LIMIT')}
-   const created=await tx.serviceRequest.create({data:{kind:kind as RequestKind,name,phone,projectType,area,description:text('description',3000),propertyType:text('propertyType',100),service:text('service',100),wallCondition:text('wallCondition',100),paintType:text('paintType',100),address:text('address',500),preferredDate:date,preferredTime:text('preferredTime',100)}});
+   const created=await tx.serviceRequest.create({data:{kind:kind as RequestKind,userId:user?.id,name,phone,projectType,area,description:text('description',3000),propertyType:text('propertyType',100),service:text('service',100),wallCondition:text('wallCondition',100),paintType:text('paintType',100),address:text('address',500),preferredDate:date,preferredTime:text('preferredTime',100)}});
+   if(user)await tx.notification.create({data:{userId:user.id,title:'درخواست شما ثبت شد',body:`شناسه پیگیری: ${created.id}`}});
    const admins=await tx.user.findMany({where:{role:{in:['ADMIN','SUPER_ADMIN']}},select:{id:true}});
    if(admins.length)await tx.notification.createMany({data:admins.map(a=>({userId:a.id,title:'درخواست جدید ثبت شد',body:`شناسه درخواست: ${created.id}`}))});
    return created.id;

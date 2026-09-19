@@ -1,0 +1,38 @@
+{
+  "results": [
+    {
+      "path": "/",
+      "width": 1440,
+      "overflow": false,
+      "logoLoaded": true
+    },
+    {
+      "path": "/",
+      "width": 390,
+      "overflow": false,
+      "logoLoaded": true
+    },
+    {
+      "mobileMenuVisible": true
+    },
+    {
+      "path": "/",
+      "width": 820,
+      "overflow": false,
+      "logoLoaded": true
+    },
+    {
+      "registrationRedirect": true
+    },
+    {
+      "dashboardMobileOverflow": false
+    },
+    {
+      "sliderKeyboardWorks": true
+    },
+    {
+      "colorSelection": true
+    }
+  ],
+  "errors": []
+}

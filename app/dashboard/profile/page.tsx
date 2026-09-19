@@ -1,0 +1,1 @@
+import {requireUser} from '@/lib/auth';import ProfileForm from '@/components/ProfileForm';export default async function Page(){const user=await requireUser();return <><div className="workspace-heading"><div><div className="eyebrow">PROFILE</div><h1>اطلاعات حساب</h1></div></div><ProfileForm name={user.profile?.name||''} phone={user.profile?.phone||''} email={user.email}/></>}

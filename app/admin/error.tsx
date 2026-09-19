@@ -1,0 +1,1 @@
+'use client';export default function ErrorPage({reset}:{reset:()=>void}){return <div className="empty-state" role="alert"><h2>دریافت اطلاعات ممکن نشد.</h2><p>اتصال به سرویس را بررسی کنید و دوباره تلاش کنید. اطلاعات حساس نمایش داده نمی‌شود.</p><button className="btn" onClick={reset}>تلاش دوباره</button></div>}

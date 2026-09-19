@@ -1,0 +1,2 @@
+import {NextRequest,NextResponse} from 'next/server';import {requireUser} from '@/lib/auth';import {readMutation,field,apiError} from '@/lib/security';import {db} from '@/lib/db';
+export async function PATCH(req:NextRequest){try{const data=await readMutation(req);const user=await requireUser();const id=field(data,'id',100,true);await db.notification.updateMany({where:{id,userId:user.id,readAt:null},data:{readAt:new Date()}});return NextResponse.json({message:'اعلان خوانده شد.'})}catch(e){return apiError(e)}}
